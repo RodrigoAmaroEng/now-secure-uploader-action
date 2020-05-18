@@ -26,7 +26,9 @@ async function run() {
             .then(resp => {
                 if (resp.message && resp.name)
                     throw new Error(resp.message)
-                console.log("Now Secure Response", resp)
+                core.setOutput('appId', resp.application)
+                core.setOutput('taskId', resp.task)
+                console.log("File successfully sent to Now Secure")
             })
 
     } catch (error) {

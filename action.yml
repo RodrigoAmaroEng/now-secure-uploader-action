@@ -7,6 +7,14 @@ inputs:
   artifact_path:  # id of input
     description: 'Path for the APK or IPA file'
     required: true
+outputs:
+  appId:
+    description: 'The application id assigned by Now Secure'
+  taskId:
+    description: 'The task for the analysis held by Now Secure'
 runs:
   using: 'node12'
   main: 'index.js'
+branding:
+  icon: 'lock'
+  color: 'green'
