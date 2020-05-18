@@ -10,7 +10,7 @@ async function run() {
         const stats = fs.statSync(filePath);
         const fileSizeInBytes = stats.size;
         console.log(`File ${filePath} with ${fileSizeInBytes} bytes`)
-        if (!nowSecureToken) {
+        if (!nowSecureToken || nowSecureToken.length < 1) {
             throw new Exception('No token was provided')
         }
         let readStream = fs.createReadStream(filePath);
@@ -18,11 +18,14 @@ async function run() {
             method: 'POST',
             headers: {
                 "Authorization": "Bearer " + nowSecureToken,
-                "Content-length": fileSizeInBytes
+                "Content-length": fileSizeInBytes,
+                "Content-type": 'application/x-www-form-urlencoded'
             },
             body: readStream
         }).then(data => data.json())
             .then(resp => {
+                if (resp.message && resp.name)
+                    throw new Exception(resp.message)
                 console.log("Now Secure Response", resp)
             })
             .catch(error => core.setFailed(error.message))
