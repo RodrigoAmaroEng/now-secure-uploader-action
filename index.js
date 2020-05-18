@@ -11,7 +11,7 @@ async function run() {
         const fileSizeInBytes = stats.size;
         console.log(`File ${filePath} with ${fileSizeInBytes} bytes`)
         if (!nowSecureToken || nowSecureToken.length < 1) {
-            throw new Exception('No token was provided')
+            throw new Error('No token was provided')
         }
         let readStream = fs.createReadStream(filePath);
         await fetch('https://lab-api.nowsecure.com/build/', {
@@ -25,10 +25,9 @@ async function run() {
         }).then(data => data.json())
             .then(resp => {
                 if (resp.message && resp.name)
-                    throw new Exception(resp.message)
+                    throw new Error(resp.message)
                 console.log("Now Secure Response", resp)
             })
-            .catch(error => core.setFailed(error.message))
 
     } catch (error) {
         core.setFailed(error.message);
