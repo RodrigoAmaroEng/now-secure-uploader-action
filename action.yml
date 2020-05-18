@@ -1,0 +1,12 @@
+name: 'Now Secure Uploader'
+description: 'Uploads an APK or IPA to Now Secure analysis service'
+inputs:
+  token:  # id of input
+    description: 'Authoriztion toke to use the Now Secure services'
+    required: true
+  artifact_path:  # id of input
+    description: 'Path for the APK or IPA file'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

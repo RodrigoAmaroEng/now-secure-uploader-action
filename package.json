@@ -1,0 +1,25 @@
+{
+  "name": "now-secure-uploader-action",
+  "version": "1.0.0",
+  "description": "GitHub Actions step to upload an APK or IPA to Now Secure analysis service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodrigoAmaroEng/now-secure-uploader-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RodrigoAmaroEng/now-secure-uploader-action/issues"
+  },
+  "homepage": "https://github.com/RodrigoAmaroEng/now-secure-uploader-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^2.2.0",
+    "node-fetch": "^2.6.0"
+  }
+}
