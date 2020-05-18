@@ -6,9 +6,13 @@ const fs = require('fs')
 async function run() {
     try {
         const nowSecureToken = core.getInput('token');
-        const filePath = core.getInput('artifact_path')
+        const filePath = core.getInput('artifact_path');
         const stats = fs.statSync(filePath);
         const fileSizeInBytes = stats.size;
+        console.log(`File ${filePath} with ${fileSizeInBytes} bytes`)
+        if (!nowSecureToken) {
+            throw new Exception('No token was provided')
+        }
         let readStream = fs.createReadStream(filePath);
         await fetch('https://lab-api.nowsecure.com/build/', {
             method: 'POST',
@@ -19,7 +23,7 @@ async function run() {
             body: readStream
         }).then(data => data.json())
             .then(resp => {
-                console.log(resp)
+                console.log("Now Secure Response", resp)
             })
             .catch(error => core.setFailed(error.message))
 
